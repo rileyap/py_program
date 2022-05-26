@@ -1,9 +1,12 @@
 from openpyxl import load_workbook
-path = ""
-names =  ["name", "name2"]
+path = "C:\\git_workspaces\\py_program\\"
+names =  ["RP", "JG","AK"]
+print("Enter your intials capitalized:")
+nameInput = input()
 endFile = ""
 for name in names:
-    continue
+    if name == nameInput:
+        endFile = nameInput + "book.xlsx"
 actualFileName = path + endFile
 
 wb = load_workbook(filename= actualFileName)
