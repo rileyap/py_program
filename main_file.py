@@ -6,9 +6,11 @@ names =  ["RP", "JG","AK"]
 print("Enter your intials capitalized:")
 nameInput = input()
 endFile = ""
-for name in names:
-    if name == nameInput:
-        endFile = nameInput + "book.xlsx"
+dict = {'RP': 'PEARSON, RILEY', 'JG': 'GONZO, JOSH'}
+
+for key in dict:
+    if key == nameInput:
+        endFile = dict[key] + ".xlsx"
 actualFileName = path + endFile
 
 wb = load_workbook(filename= actualFileName)
