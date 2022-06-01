@@ -8,7 +8,6 @@ nameInput = input()
 endFile = ""
 choosenKey = ""
 shiftWorked = ""
-hoursWorked = ""
 startShift = ""
 endShift = ""
 dict = {'RP': 'PEARSON, RILEY', 'JG': 'GONZALEZ, JOSH', 'OA' :'ALBERS, OLIVIA', 'AB': 'BUBP, AUDRA', 'AF': 'FULLENKAMP, ALLYSEN', 
@@ -39,27 +38,31 @@ for key in dict3:
         shiftWorked = dict3[key]
         print(shiftWorked)
 print("Enter your shift length: D for day, N for night, C for custom")
+
 hoursWorked = input()
-if hoursWorked == 'm' or 'M':
+if hoursWorked == 'C' or hoursWorked == 'c':
     print("Enter the start of your shift: example 12:00 PM")
     startShift = input()
     print("Enter the end of your shift: example 3:00 PM")
     endShift = input()
+
+if hoursWorked == "d" or hoursWorked == "D":
+    startShift = "12:45 PM"
+    endShift = "5:00 PM"
+if hoursWorked == 'n' or hoursWorked == 'N':
+    startShift = "5:45 PM"
+    endShift = "8:15 PM"
 print(startShift, endShift)
-
-
-
-
-
-
 wb = load_workbook(filename= actualFileName)
 sheet = wb.active
 today = date.today()
-sheet["A1"] = "l"
+
 dateFromExcel = sheet["H5"].value
 dateFromExcel = dateFromExcel.date()
+
 print(dateFromExcel)
 diff_date = today - dateFromExcel
 print(diff_date)
+
 wb.save(filename= actualFileName)
 
