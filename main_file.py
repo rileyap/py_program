@@ -6,12 +6,17 @@ names =  ["RP", "JG","AK"]
 print("Enter your intials capitalized:")
 nameInput = input()
 endFile = ""
+choosenKey = ""
 dict = {'RP': 'PEARSON, RILEY', 'JG': 'GONZO, JOSH'}
-
+dict2 = {'PEARSON, RILEY': 'prompt', 'GONZO, JOSH': 'prompt', 'VAUGHN, ALLI': 'prompt'}
 for key in dict:
     if key == nameInput:
         endFile = dict[key] + ".xlsx"
+        choosenKey = dict[key]
 actualFileName = path + endFile
+for key in dict2:
+    if key == choosenKey:
+        print("ok")
 
 wb = load_workbook(filename= actualFileName)
 sheet = wb.active
