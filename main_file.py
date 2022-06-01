@@ -2,14 +2,17 @@ from logging import raiseExceptions
 from openpyxl import load_workbook
 from datetime import date, datetime, time
 from datetime import timedelta
-path = "C:\\git_workspaces\\py_program\\"
-names =  ["RP", "JG","AK"]
+path = "C:\\Users\\Lifeguard\\Desktop\\Timecards2022\\"
 print("Enter your intials capitalized:")
 nameInput = input()
 endFile = ""
 choosenKey = ""
-dict = {'RP': 'PEARSON, RILEY', 'JG': 'GONZO, JOSH'}
-dict2 = {'PEARSON, RILEY': 'prompt', 'GONZO, JOSH': 'prompt', 'VAUGHN, ALLI': 'prompt'}
+shiftWorked = ""
+dict = {'RP': 'PEARSON, RILEY', 'JG': 'GONZALEZ, JOSH', 'OA' :'ALBERS, OLIVIA', 'AB': 'BUBP, AUDRA', 'AF': 'FULLENKAMP, ALLYSEN', 
+'CF': 'FULLENKAMP, CARSON', 'PG': 'GUGGENBILLER, PAIGE', 'KH': 'HEITKAMP, KAYLA', 'LH': 'HIPPLE, LAURA', 'JK': 'JOELLE, KAUP',
+'ABK': 'KNAPKE, ABIGAIL', 'ALK': 'KNAPKE, ALLISON', 'IK': 'KNAPKE, ISAAC', 'NN': 'NGUYEN, NGOC', 'AV': 'VAUGHN, ALLISON', 
+'FW': 'WENDEL, FAITH' }
+dict2 = {'PEARSON, RILEY': 'prompt', 'GONZALEZ, JOSH': 'prompt', 'VAUGHN, ALLISON': 'prompt'}
 for key in dict:
     if key == nameInput:
         endFile = dict[key] + ".xlsx"
@@ -21,13 +24,15 @@ if choosenKey == "":
 else:
     for key in dict2:
         if key == choosenKey:
-            print("ok")
+            print("Enter your type of shift: M for managment, G for guard, L for lesson")
+            shiftWorked = input()
+
 
 wb = load_workbook(filename= actualFileName)
 sheet = wb.active
 today = date.today()
 sheet["A1"] = "l"
-dateFromExcel = sheet["E1"].value
+dateFromExcel = sheet["H5"].value
 dateFromExcel = dateFromExcel.date()
 print(dateFromExcel)
 diff_date = today - dateFromExcel
