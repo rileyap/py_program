@@ -2,6 +2,8 @@ from logging import raiseExceptions
 from openpyxl import load_workbook
 from datetime import date, datetime, time
 from datetime import timedelta
+
+from scipy.fftpack import diff
 path = "C:\\Users\\Lifeguard\\Desktop\\Timecards2022\\"
 print("Enter your intials capitalized:")
 nameInput = input()
@@ -62,7 +64,12 @@ dateFromExcel = dateFromExcel.date()
 
 print(dateFromExcel)
 diff_date = today - dateFromExcel
-print(diff_date)
+diff_date = (diff_date.days)
+if diff_date < 7:
+    newIndex = diff_date + 14
+if diff_date > 7:
+    newIndex = diff_date + 15
+print(newIndex)
 
 wb.save(filename= actualFileName)
 
