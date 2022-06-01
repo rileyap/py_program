@@ -69,7 +69,12 @@ if diff_date < 7:
     newIndex = diff_date + 14
 if diff_date > 7:
     newIndex = diff_date + 15
-print(newIndex)
 
+newIndex = str(newIndex)
+firstCheck = "B"
+firstCheck += newIndex
+if sheet[firstCheck].value == None:
+    print("ok")
+print(firstCheck)
 wb.save(filename= actualFileName)
 
