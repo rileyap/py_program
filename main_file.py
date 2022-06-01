@@ -1,3 +1,4 @@
+from logging import raiseExceptions
 from openpyxl import load_workbook
 from datetime import date, datetime, time
 from datetime import timedelta
@@ -14,9 +15,13 @@ for key in dict:
         endFile = dict[key] + ".xlsx"
         choosenKey = dict[key]
 actualFileName = path + endFile
-for key in dict2:
-    if key == choosenKey:
-        print("ok")
+if choosenKey == "":
+    print("Invalid user entered. Exiting program now")
+    exit()
+else:
+    for key in dict2:
+        if key == choosenKey:
+            print("ok")
 
 wb = load_workbook(filename= actualFileName)
 sheet = wb.active
