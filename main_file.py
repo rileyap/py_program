@@ -73,8 +73,30 @@ if diff_date > 7:
 newIndex = str(newIndex)
 firstCheck = "B"
 firstCheck += newIndex
-if sheet[firstCheck].value == None:
-    print("ok")
+
+if sheet[firstCheck].value != None:
+    firstCheck = "D" + newIndex
+    if sheet[firstCheck].value != None:
+        firstCheck = "F" + newIndex
+        if sheet[firstCheck].value != None:
+            firstCheck = "H" + newIndex
+            if sheet[firstCheck].value != None:
+                firstCheck = "J" + newIndex
+charOfDate = firstCheck[0]
+secondDate = chr(ord(charOfDate) + 1)
+secondDate += newIndex
+shiftCol = shiftWorked + newIndex
+
 print(firstCheck)
+print(secondDate)
+sheet[firstCheck] = startShift
+sheet[secondDate] = endShift
+endShift = endShift[0:4]
+(h,s) = endShift.split(':')
+newNum = float(h) + (float(s) / 60.0)
+#(h1, s1)  = startShift.split(':')
+
+
+print(newNum)
 wb.save(filename= actualFileName)
 
