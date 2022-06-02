@@ -1,7 +1,9 @@
 from logging import raiseExceptions
+from tracemalloc import start
 from openpyxl import load_workbook
 from datetime import date, datetime, time
 from datetime import timedelta
+from datetime import *
 
 from scipy.fftpack import diff
 path = "C:\\Users\\Lifeguard\\Desktop\\Timecards2022\\"
@@ -38,7 +40,7 @@ if shiftWorked == "":
 for key in dict3:
     if shiftWorked == key:
         shiftWorked = dict3[key]
-        print(shiftWorked)
+        
 print("Enter your shift length: D for day, N for night, C for custom")
 
 hoursWorked = input()
@@ -49,12 +51,12 @@ if hoursWorked == 'C' or hoursWorked == 'c':
     endShift = input()
 
 if hoursWorked == "d" or hoursWorked == "D":
-    startShift = "12:45 PM"
-    endShift = "5:00 PM"
+    startShift = '12:45 PM'
+    endShift = '5:00 PM'
 if hoursWorked == 'n' or hoursWorked == 'N':
     startShift = "5:45 PM"
     endShift = "8:15 PM"
-print(startShift, endShift)
+# print(startShift, endShift)
 wb = load_workbook(filename= actualFileName)
 sheet = wb.active
 today = date.today()
@@ -62,7 +64,7 @@ today = date.today()
 dateFromExcel = sheet["H5"].value
 dateFromExcel = dateFromExcel.date()
 
-print(dateFromExcel)
+# print(dateFromExcel)
 diff_date = today - dateFromExcel
 diff_date = (diff_date.days)
 if diff_date < 7:
@@ -87,16 +89,28 @@ secondDate = chr(ord(charOfDate) + 1)
 secondDate += newIndex
 shiftCol = shiftWorked + newIndex
 
-print(firstCheck)
-print(secondDate)
+# print(firstCheck)
+# print(secondDate)
 sheet[firstCheck] = startShift
 sheet[secondDate] = endShift
-endShift = endShift[0:4]
-(h,s) = endShift.split(':')
-newNum = float(h) + (float(s) / 60.0)
-#(h1, s1)  = startShift.split(':')
 
 
-print(newNum)
+
+
+FMT = '%I:%M %p'
+tdelta = datetime.strptime(endShift, FMT) 
+mdelta = datetime.strptime(startShift, FMT)
+kDelta = tdelta - mdelta
+
+kDelta = str(kDelta)
+(h,m,s) = kDelta.split(':')
+hoursInDecimal = float(h) + (float(m) /60.0)
+
+if sheet[shiftCol].value == None:
+    sheet[shiftCol] = hoursInDecimal
+else:
+    val = sheet[shiftCol].value
+    hoursInDecimal += val
+    sheet[shiftCol] = hoursInDecimal
 wb.save(filename= actualFileName)
 
