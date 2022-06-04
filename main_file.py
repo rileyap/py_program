@@ -6,7 +6,7 @@ from datetime import date, datetime, time
 from datetime import timedelta
 from datetime import *
 
-from scipy.fftpack import diff
+
 path = "C:\\Users\\Lifeguard\\Desktop\\Timecards2022\\"
 print("Enter your intials:")
 nameInput = input()
@@ -134,4 +134,11 @@ else:
     hoursInDecimal += val
     sheet[shiftCol] = hoursInDecimal
 wb.save(filename= actualFileName)
-
+import subprocess
+print("Would you like to enter another user?(Y/N)")
+runAgain = input()
+runAgain = runAgain.upper()
+if runAgain != 'Y':
+    exit()
+else:
+    subprocess.call([r'C:\\Users\\14197\\Desktop\\myProgram.bat'])
