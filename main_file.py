@@ -72,10 +72,19 @@ dateFromExcel = dateFromExcel.date()
 # print(dateFromExcel)
 diff_date = today - dateFromExcel
 diff_date = (diff_date.days)
-
+week1Hours = sheet['L21'].value
+week2Hours = sheet['L29'].value
 if diff_date < 7:
+    if week1Hours >= 40.0:
+        print("Your hours exceed 40 for this week, please proceed manually")
+        sleep(4)
+        exit()
     newIndex = diff_date + 14
 if diff_date >= 7:
+    if week2Hours >= 40.0:
+        print("Your hours exceed 40 for this week, please proceed manually")
+        sleep(4)
+        exit()
     newIndex = diff_date + 15
 
 newIndex = str(newIndex)
