@@ -1,4 +1,5 @@
 from logging import raiseExceptions
+from time import sleep
 from tracemalloc import start
 from openpyxl import load_workbook
 from datetime import date, datetime, time
@@ -7,8 +8,9 @@ from datetime import *
 
 from scipy.fftpack import diff
 path = "C:\\Users\\Lifeguard\\Desktop\\Timecards2022\\"
-print("Enter your intials capitalized:")
+print("Enter your intials:")
 nameInput = input()
+nameInput = nameInput.upper()
 endFile = ""
 choosenKey = ""
 shiftWorked = ""
@@ -33,9 +35,11 @@ else:
         if key == choosenKey:
             print("Enter your type of shift: M for managment, G for guard, L for lesson")
             shiftWorked = input()
+            shiftWorked = shiftWorked.upper()
 if shiftWorked == "":
     print("Enter your type of shift: G for guard, L for Lesson")
     shiftWorked = input()
+    shiftWorked = shiftWorked.upper()
 
 for key in dict3:
     if shiftWorked == key:
@@ -44,16 +48,17 @@ for key in dict3:
 print("Enter your shift length: D for day, N for night, C for custom")
 
 hoursWorked = input()
-if hoursWorked == 'C' or hoursWorked == 'c':
+hoursWorked = hoursWorked.upper()
+if hoursWorked == 'C':
     print("Enter the start of your shift: example 12:00 PM")
     startShift = input()
     print("Enter the end of your shift: example 3:00 PM")
     endShift = input()
 
-if hoursWorked == "d" or hoursWorked == "D":
+if hoursWorked == "D":
     startShift = '12:45 PM'
     endShift = '5:00 PM'
-if hoursWorked == 'n' or hoursWorked == 'N':
+if hoursWorked == 'N':
     startShift = "5:45 PM"
     endShift = "8:15 PM"
 # print(startShift, endShift)
@@ -67,9 +72,10 @@ dateFromExcel = dateFromExcel.date()
 # print(dateFromExcel)
 diff_date = today - dateFromExcel
 diff_date = (diff_date.days)
+
 if diff_date < 7:
     newIndex = diff_date + 14
-if diff_date > 7:
+if diff_date >= 7:
     newIndex = diff_date + 15
 
 newIndex = str(newIndex)
@@ -84,6 +90,12 @@ if sheet[firstCheck].value != None:
             firstCheck = "H" + newIndex
             if sheet[firstCheck].value != None:
                 firstCheck = "J" + newIndex
+                if sheet[firstCheck].value != None:
+                    print("All dates are full, please enter manually")
+                    print("Exiting program now")
+                    sleep(4)
+                    exit()
+
 charOfDate = firstCheck[0]
 secondDate = chr(ord(charOfDate) + 1)
 secondDate += newIndex
